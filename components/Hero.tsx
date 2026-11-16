@@ -39,6 +39,7 @@ export default function Hero() {
   const mode = useRef<FrameSet>("desktop");
   const state = useRef({ p: 0 }); // 0..1 through the video
   const lastDrawn = useRef<HTMLImageElement | null>(null);
+  const lastPan = useRef(-1);
   const cutCanvas = useRef<HTMLCanvasElement>(null);
   const cutImg = useRef<HTMLImageElement | null>(null);
 
@@ -128,16 +129,25 @@ export default function Hero() {
   }
 
   /** where the frame sits inside a canvas (device px) — shared by the frame and the cutout */
-  function placeRect(c: HTMLCanvasElement, iw: number, ih: number) {
+  /** mobile: how far the camera has panned across the wide frame (0 = left edge, 1 = right edge) */
+  const panFor = (p: number, c: HTMLCanvasElement) =>
+    c.width / c.height < 1.25 ? 0.22 + 0.4 * Math.min(1, Math.max(0, p)) : 0.5; // portrait screens pan, landscape stays centred
+
+  function placeRect(c: HTMLCanvasElement, iw: number, ih: number, pan = 0.5) {
     if (mode.current === "desktop") {
       const s = Math.max(c.width / iw, c.height / ih);
       const h = ih * s;
       // when the frame is taller than the canvas, crop from the bottom (lawn), never the roof/sky
       const y = h > c.height ? Math.max(c.height - h, -c.height * 0.02) : (c.height - h) / 2;
-      return { x: (c.width - iw * s) / 2, y, w: iw * s, h };
+      return { x: (c.width - iw * s) * pan, y, w: iw * s, h };
     }
-    const s = (c.width / iw) * 1.18;
-    return { x: (c.width - iw * s) / 2, y: c.height * 0.36 - (ih * s) / 2, w: iw * s, h: ih * s };
+    // mobile: a tall window (68% of the screen) that crops the wide frame and pans across it as you scroll
+    const boxH = c.height * 0.68;
+    const boxY = c.height * 0.16;
+    const s = Math.max(c.width / iw, boxH / ih);
+    const w = iw * s;
+    const h = ih * s;
+    return { x: (c.width - w) * pan, y: boxY + (boxH - h) / 2, w, h, boxY, boxH };
   }
 
   /** house cut-out (sky removed) drawn exactly over the last frame, so text can sit "behind" the house */
@@ -149,7 +159,7 @@ export default function Hero() {
     const ctx = c.getContext("2d");
     if (!ctx) return;
     ctx.clearRect(0, 0, c.width, c.height);
-    const r = placeRect(c, img.naturalWidth, img.naturalHeight);
+    const r = placeRect(c, img.naturalWidth, img.naturalHeight, panFor(1, c));
     ctx.drawImage(img, r.x, r.y, r.w, r.h);
     // expose the image box (CSS px) so the "behind" headline can align to the roofline
     const dpr = c.width / c.clientWidth;
@@ -162,15 +172,17 @@ export default function Hero() {
     const c = canvas.current;
     if (!c || !images.current.length) return;
     const img = nearestLoaded(Math.round(state.current.p * (images.current.length - 1)));
-    if (!img || img === lastDrawn.current) return;
+    const pan = panFor(state.current.p, c);
+    if (!img || (img === lastDrawn.current && Math.abs(pan - lastPan.current) < 0.002)) return;
     lastDrawn.current = img;
+    lastPan.current = pan;
     fitCanvas(c);
     const ctx = c.getContext("2d");
     if (!ctx) return;
     const iw = img.naturalWidth;
     const ih = img.naturalHeight;
 
-    const r = placeRect(c, iw, ih);
+    const r = placeRect(c, iw, ih, pan);
     if (mode.current === "desktop") {
       ctx.drawImage(img, r.x, r.y, r.w, r.h);
       return;
@@ -201,7 +213,7 @@ export default function Hero() {
         (ctx) => {
           const { isMobile, reduce } = ctx.conditions as { isMobile: boolean; reduce: boolean };
           // the opening "window" matches where the frame sits
-          const startClip = isMobile ? "inset(21% 5% 49% 5% round 22px)" : "inset(25% 28% 25% 28% round 32px)";
+          const startClip = isMobile ? "inset(16% 5% 16% 5% round 26px)" : "inset(25% 28% 25% 28% round 32px)";
           const startScale = isMobile ? 1 : 0.5;
 
           const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
