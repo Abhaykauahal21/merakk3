@@ -23,7 +23,6 @@ export const metadata: Metadata = {
   title: "Merakk Studios — Architecture & Interiors",
   description:
     "Merakk Studios is an architecture and interior design practice crafting calm, enduring spaces — from open ground to a home.",
-  icons: { icon: "/assets/mark-dark.png" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
