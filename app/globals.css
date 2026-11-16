@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Merakk Studios — concrete / grey palette
+   Headings: Montserrat · Body: Nunito
+   ========================================================= */
+@theme {
+  --color-bg: #ecebe7;
+  --color-bg-2: #e3e1dc;
+  --color-surface: #f4f3f0;
+  --color-stone: #cbc8c1;
+  --color-concrete: #9e9b94;
+  --color-ink: #1d1d1c;
+  --color-ink-2: #474643;
+  --color-muted: #7e7c77;
+  --color-line: #cfccc5;
+  --color-dark: #2a2927;
+  --color-dark-2: #1a1a19;
+
+  --font-head: var(--font-montserrat), "Montserrat", system-ui, sans-serif;
+  --font-body: var(--font-nunito), "Nunito", system-ui, sans-serif;
+
+  --ease-expo: cubic-bezier(0.22, 0.8, 0.2, 1);
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-cue: cue 1.8s infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes scrollLine {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(200%); }
+  }
+  @keyframes cue {
+    0% { transform: translateY(0); opacity: 1; }
+    80% { transform: translateY(14px); opacity: 0; }
+    100% { opacity: 0; }
+  }
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    @apply bg-bg text-ink font-body text-base leading-relaxed overflow-x-hidden;
+  }
+  h1, h2, h3, h4 { @apply font-head font-light tracking-tight; }
+  ::selection { @apply bg-ink text-bg; }
+  img { @apply block max-w-full; }
+}
+
+@utility px-pad {
+  padding-inline: clamp(20px, 5vw, 72px);
+}
+@utility mx-pad-neg {
+  margin-inline: calc(clamp(20px, 5vw, 72px) * -1);
+}
+@utility section-y {
+  padding-block: clamp(80px, 11vw, 160px);
+}
+@utility eyebrow {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  color: var(--color-muted);
+}
+@utility display {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(34px, 4.4vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* SVG line drawing used by the build sequence */
+.build-svg { stroke: var(--color-ink); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.build-svg .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.build-svg .thin { stroke-width: 0.9; stroke: var(--color-ink-2); }
+.build-svg .fins { stroke-width: 3.2; stroke: #5c5a56; }
+.build-svg .fill-soft { fill: var(--color-stone); fill-opacity: 0; }
+.build-svg .fill-stone { fill: #bdb9b1; fill-opacity: 0; }
+.build-svg .fill-glass { fill: #d9d7d1; fill-opacity: 0; }
+.build-svg .fill-wall { fill: #e6e4df; fill-opacity: 0; }
+
+/* custom select arrow */
+.select-arrow {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--color-ink) 50%),
+    linear-gradient(135deg, var(--color-ink) 50%, transparent 50%);
+  background-position: calc(100% - 10px) 55%, calc(100% - 5px) 55%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
