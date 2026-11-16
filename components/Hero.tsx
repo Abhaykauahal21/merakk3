@@ -353,7 +353,7 @@ export default function Hero() {
 
   return (
     <section ref={root} id="top" className="relative">
-      <div className="h-pin relative h-svh overflow-hidden bg-bg">
+      <div className="h-pin relative h-svh overflow-hidden">
         {/* blueprint grid */}
         <div
           aria-hidden

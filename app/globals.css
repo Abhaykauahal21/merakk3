@@ -42,7 +42,30 @@
 @layer base {
   html { -webkit-font-smoothing: antialiased; }
   body {
-    @apply bg-bg text-ink font-body text-base leading-relaxed overflow-x-hidden;
+    @apply text-ink font-body text-base leading-relaxed overflow-x-hidden;
+    /* soft greyish gradient across the whole page: warm white at the top, concrete grey in the middle */
+    background-color: #e9e8e4;
+    background-image: linear-gradient(
+      180deg,
+      #f2f1ed 0%,
+      #e8e7e3 18%,
+      #dcdbd6 42%,
+      #d2d1cc 58%,
+      #dedcd7 78%,
+      #e8e7e3 100%
+    );
+  }
+  /* fixed soft light + shadow pools so the grey never looks flat while scrolling */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(1100px 700px at 8% -8%, rgba(255, 255, 255, 0.65), transparent 62%),
+      radial-gradient(900px 640px at 100% 38%, rgba(120, 118, 110, 0.16), transparent 64%),
+      radial-gradient(1000px 700px at 0% 108%, rgba(150, 148, 140, 0.18), transparent 62%);
   }
   h1, h2, h3, h4 { @apply font-head font-light tracking-tight; }
   ::selection { @apply bg-ink text-bg; }
