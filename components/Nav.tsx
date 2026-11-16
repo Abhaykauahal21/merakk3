@@ -79,9 +79,9 @@ export default function Nav() {
         className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-3 px-3 pt-3 md:px-6 md:pt-5"
       >
         {/* left — logo */}
-        <div className={`${pill} px-4 py-2.5 md:px-6 md:py-3`}>
-          <Brand />
-        </div>
+        <a href="#top" aria-label="Merakk Studios home" className={`${pill} flex items-center px-4 py-1.5 md:px-6 md:py-2`}>
+          <img src="/assets/logo-nav.png" alt="Merakk Studios" width={383} height={320} className="h-[46px] w-auto md:h-[56px]" />
+        </a>
 
         {/* right — menu + CTAs */}
         <div className={`${pill} flex items-center gap-1.5 p-1.5`}>
