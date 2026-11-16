@@ -103,7 +103,7 @@ export default function Nav() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat with Merakk Studios on WhatsApp"
-            className="flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-2.5 font-head text-[13px] font-medium text-ink transition-colors hover:border-[#25D366] hover:bg-[#25D366] hover:text-white md:px-4"
+            className="hidden items-center gap-2 rounded-full border border-line bg-surface px-3 py-2.5 font-head text-[13px] font-medium text-ink transition-colors hover:border-[#25D366] hover:bg-[#25D366] hover:text-white md:flex md:px-4"
           >
             <WhatsAppIcon className="h-[18px] w-[18px]" />
             <span className="hidden lg:inline">WhatsApp</span>
@@ -113,7 +113,7 @@ export default function Nav() {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="group hidden items-center gap-3 rounded-full bg-ink px-5 py-2.5 font-head text-[13px] font-medium text-surface transition-colors hover:bg-ink-2 sm:inline-flex"
+              className="group hidden items-center gap-3 rounded-full bg-ink px-5 py-2.5 font-head text-[13px] font-medium text-surface transition-colors hover:bg-ink-2 md:inline-flex"
             >
               Start a Project <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
