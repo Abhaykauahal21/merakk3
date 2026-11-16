@@ -71,9 +71,10 @@ export default function Process() {
           </div>
         </div>
 
+        <div className="-mx-[clamp(20px,5vw,72px)] flex snap-x snap-mandatory gap-3 overflow-x-auto px-[clamp(20px,5vw,72px)] [scrollbar-width:none] lg:contents [&::-webkit-scrollbar]:hidden">
         {steps.map((s, i) => (
-          <article key={s.n} className="group grid gap-5 lg:w-[30vw] lg:shrink-0">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] bg-bg-2">
+          <article key={s.n} className="group grid w-[78vw] shrink-0 snap-start gap-5 sm:w-[46vw] lg:w-[30vw]">
+            <div className="relative aspect-[4/3.2] overflow-hidden rounded-[24px] bg-bg-2">
               <img
                 loading="lazy"
                 src={stepImages[i]}
@@ -90,6 +91,7 @@ export default function Process() {
             </div>
           </article>
         ))}
+        </div>
         <div className="hidden lg:block lg:w-[6vw] lg:shrink-0" />
       </div>
     </section>

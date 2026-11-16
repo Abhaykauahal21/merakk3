@@ -138,7 +138,7 @@ export default function Projects() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="grid gap-[clamp(14px,1.6vw,24px)] md:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-2 gap-x-3 gap-y-6 md:gap-[clamp(14px,1.6vw,24px)] lg:grid-cols-3"
           >
             <AnimatePresence mode="popLayout">
               {list.map((p) => (
@@ -150,11 +150,11 @@ export default function Projects() {
                   viewport={{ once: true, margin: "0px 0px -8% 0px" }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.7, ease }}
-                  className={`group flex flex-col ${p.wide && showWide ? "lg:col-span-2" : ""}`}
+                  className={`group flex flex-col ${p.wide && showWide ? "col-span-2" : ""}`}
                 >
                   <div
                     data-cursor="View"
-                    className={`relative overflow-hidden rounded-[24px] bg-bg-2 ${p.wide && showWide ? "aspect-[4/3.2] lg:aspect-[2.53/1]" : "aspect-[4/3.2]"}`}
+                    className={`relative overflow-hidden rounded-[24px] bg-bg-2 ${p.wide && showWide ? "aspect-[16/9] lg:aspect-[2.53/1]" : "aspect-[4/5] sm:aspect-[4/3.2]"}`}
                   >
                     <ClipImage
                       src={p.img}
@@ -170,10 +170,10 @@ export default function Projects() {
                       ↗
                     </span>
                   </div>
-                  <div className="flex items-baseline justify-between gap-3 pb-1.5 pt-4">
-                    <h3 className="text-lg font-normal">{p.title}</h3>
-                    <span className="text-xs capitalize text-muted">
-                      {p.cat} · {p.area} · {p.year}
+                  <div className="flex flex-col gap-0.5 pb-1.5 pt-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3 sm:pt-4">
+                    <h3 className="text-[15px] font-normal sm:text-lg">{p.title}</h3>
+                    <span className="text-[11px] capitalize text-muted sm:text-xs">
+                      {p.cat} · <span className="hidden sm:inline">{p.area} · </span>{p.year}
                     </span>
                   </div>
                 </motion.article>

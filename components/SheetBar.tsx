@@ -49,7 +49,7 @@ export default function SheetBar({ n, label, sheet, scale = "1:100", dark = fals
   const ink = dark ? "border-white/50" : "border-ink/50";
 
   return (
-    <div ref={root} className={`col-span-full mb-[clamp(36px,5vw,72px)] ${className}`}>
+    <div ref={root} className={`col-span-full mb-[clamp(24px,5vw,72px)] ${className}`}>
       <div className={`flex items-center justify-between gap-4 pb-3 font-head text-[10px] uppercase tracking-[0.24em] ${muted}`}>
         <span className="sb-item flex items-center gap-3">
           <span className={`grid h-7 w-7 place-items-center rounded-full border text-[10px] tracking-normal ${ink} ${dark ? "text-white" : "text-ink"}`}>

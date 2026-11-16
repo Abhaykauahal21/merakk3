@@ -233,7 +233,7 @@ export default function Hero() {
           }
 
           const ir = { immediateRender: false };
-          const end = isMobile ? "+=340%" : "+=400%";
+          const end = isMobile ? "+=260%" : "+=400%";
           const tl = gsap.timeline({
             defaults: { ease: "none" },
             scrollTrigger: {

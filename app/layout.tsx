@@ -4,6 +4,7 @@ import "./globals.css";
 import { ReadyProvider } from "@/components/ReadyProvider";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
+import MobileDock from "@/components/MobileDock";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ReadyProvider>
           <SmoothScroll />
           <Cursor />
+          <MobileDock />
           {children}
         </ReadyProvider>
       </body>

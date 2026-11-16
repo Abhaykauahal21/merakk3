@@ -20,9 +20,9 @@ export default function Approach() {
         </Reveal>
       </div>
 
-      <div className="grid gap-[clamp(14px,1.6vw,24px)] md:grid-cols-3">
+      <div className="-mx-[clamp(20px,5vw,72px)] -my-10 flex snap-x snap-mandatory gap-3 overflow-x-auto px-[clamp(20px,5vw,72px)] py-10 [scrollbar-width:none] md:mx-0 md:my-0 md:grid md:grid-cols-3 md:gap-[clamp(14px,1.6vw,24px)] md:overflow-visible md:px-0 md:py-0 [&::-webkit-scrollbar]:hidden">
         {categories.map((c, i) => (
-          <Parallax key={c.title} distance={30 + i * 55}>
+          <Parallax key={c.title} distance={30 + i * 55} className="w-[74vw] shrink-0 snap-start sm:w-[46vw] md:w-auto">
           <Reveal delay={i * 0.1}>
             <a href="#projects" className="group flex flex-col">
               <ClipImage

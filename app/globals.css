@@ -56,7 +56,7 @@
   margin-inline: calc(clamp(20px, 5vw, 72px) * -1);
 }
 @utility section-y {
-  padding-block: clamp(80px, 11vw, 160px);
+  padding-block: clamp(44px, 10vw, 160px);
 }
 @utility eyebrow {
   font-family: var(--font-head);
