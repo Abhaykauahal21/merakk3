@@ -51,7 +51,10 @@ export default function Team() {
               <article className="group">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-t-[999px] rounded-b-[26px] bg-bg-2">
                   <img
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
+                    width={720}
+                    height={900}
                     src={m.img}
                     alt={`${m.name}, ${m.role}`}
                     style={{ objectPosition: m.pos }}

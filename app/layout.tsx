@@ -28,6 +28,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${nunito.variable}`}>
+      <head>
+        <link rel="preload" as="image" href="/team/karan.webp" type="image/webp" />
+        <link rel="preload" as="image" href="/team/khushboo.webp" type="image/webp" />
+        <link rel="preload" as="image" href="/team/avantika.webp" type="image/webp" />
+      </head>
       <body>
         <ReadyProvider>
           <SmoothScroll />
